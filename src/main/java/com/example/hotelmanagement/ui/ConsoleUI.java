@@ -44,9 +44,9 @@ public class ConsoleUI {
 
     // Login screen
     private boolean login() {
-        System.out.println("Enter ID: ");
+        System.out.print("Enter ID: ");
         String id = input.nextLine();
-        System.out.println("Enter Password: ");
+        System.out.print("Enter Password: ");
         String password = input.nextLine();
 
         // Default login id and password
@@ -68,6 +68,7 @@ public class ConsoleUI {
         System.out.println("3. View All Customers");
         System.out.println("Select: ");
         int option = input.nextInt();
+        input.nextLine();
 
         switch(option) {
             case 1 -> {
@@ -109,12 +110,14 @@ public class ConsoleUI {
                 int roomID = input.nextInt();
                 System.out.print("Enter Check-in Date (YYYY-MM-DD): ");
                 String checkInDate = input.nextLine();
+                checkInDate = input.nextLine();
                 System.out.print("Enter Check-out Date (YYYY-MM-DD): ");
                 String checkOutDate = input.nextLine();
                 System.out.print("Enter Total Cost: ");
                 double totalCost = input.nextDouble();
                 System.out.print("Enter Reservation Date (YYYY-MM-DD): ");
                 String reservationDate = input.nextLine();
+                reservationDate = input.nextLine();
                 reservationManager.addReservation(customerID, roomID,checkInDate,
                         checkOutDate, totalCost, reservationDate);
             }

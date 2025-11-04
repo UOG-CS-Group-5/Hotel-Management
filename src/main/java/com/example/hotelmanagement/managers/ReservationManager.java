@@ -13,15 +13,23 @@ public class ReservationManager {
         Reservation reservation = new Reservation(nextID++, customerID, roomID, checkInDate, checkOutDate, totalCost, reservationDate);
 
         reservations.put(reservation.getReservationID(), reservation);
+        System.out.println("==============================================");
         System.out.println("Reservation added successfully!");
+        System.out.println("==============================================");
     }
 
     // Removes reservation by reservationID
     public void deleteReservation(int reservationID) {
-        if(reservations.remove(reservationID) != null)
+        if(reservations.remove(reservationID) != null) {
+            System.out.println("==============================================");
             System.out.println("Reservation deleted successfully!");
-        else
+            System.out.println("==============================================");
+        }
+        else {
+            System.out.println("==============================================");
             System.out.println("Reservation not found!");
+            System.out.println("==============================================");
+        }
     }
 
     // Displays all reservations for a given customer ID
@@ -37,10 +45,13 @@ public class ReservationManager {
     // Displays all reservations
     public void displayAllReservations() {
         if(reservations.isEmpty()) {
+            System.out.println("==============================================");
             System.out.println("No reservations found.");
+            System.out.println("==============================================");
             return;
         }
         for(Reservation r : reservations.values()) {
+            System.out.println("==============================================");
             System.out.println(r);
         }
     }

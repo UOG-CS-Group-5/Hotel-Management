@@ -9,16 +9,18 @@ import java.util.*;
 // Handles customer management (e.g. creating, deleting, searching for customer)
 public class CustomerManager {
     // Adds new customer to database
-    public void addCustomer(String fullName, String email, String phoneNum, String address) {
-        String sql = "INSERT INTO Customers (fullName, email, phoneNum, address) VALUES (?, ?, ? ,?)";
+    public void addCustomer(String fullName, String email, String phone, String address) {
+        String sql = "INSERT INTO Customers (fullName, email, phone, address) VALUES (?, ?, ? ,?)";
         try(Connection connection = DatabaseConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, fullName);
             statement.setString(2, email);
-            statement.setString(3, phoneNum);
+            statement.setString(3, phone);
             statement.setString(4, address);
             statement.executeUpdate();
+            System.out.println("==============================================");
             System.out.println("Customer added to database!");
+            System.out.println("==============================================");
         } catch(SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }
@@ -32,10 +34,14 @@ public class CustomerManager {
                 statement.setInt(1, customerID);
                 int rows = statement.executeUpdate();
                 if(rows > 0 ) {
+                    System.out.println("==============================================");
                     System.out.println("Customer deleted successfully!");
+                    System.out.println("==============================================");
                 }
                 else {
+                    System.out.println("==============================================");
                     System.out.println("No customer found with that ID.");
+                    System.out.println("==============================================");
                 }
             } catch(SQLException e) {
             System.out.println("Database error: " + e.getMessage());
