@@ -8,4 +8,6 @@ module com.example.hotelmanagement {
     exports com.example.hotelmanagement;
     exports com.example.hotelmanagement.database;
     opens com.example.hotelmanagement.database to javafx.fxml;
+    exports com.example.hotelmanagement.Controllers;
+    opens com.example.hotelmanagement.Controllers to javafx.fxml;
 }
