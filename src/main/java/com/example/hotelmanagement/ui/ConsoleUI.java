@@ -105,8 +105,7 @@ public class ConsoleUI {
             case 1 -> {
                 System.out.print("Enter Customer ID: ");
                 int customerID = input.nextInt();
-                input.nextLine();
-                System.out.println("Enter Room ID: ");
+                System.out.print("Enter Room ID: ");
                 int roomID = input.nextInt();
                 System.out.print("Enter Check-in Date (YYYY-MM-DD): ");
                 String checkInDate = input.nextLine();
@@ -153,18 +152,18 @@ public class ConsoleUI {
                 System.out.print("Enter Customer ID: ");
                 int customerID = input.nextInt();
                 var reservation = reservationManager.searchReservationByCustomerID(customerID);
-                if (reservation.isEmpty()) {
+                if (reservation == null) {
                     System.out.println("No reservations found.");
                 }
                 else {
-                    reservation.forEach(System.out::println);
+                    System.out.println(reservation);
                 }
             }
             case 3 -> {
                 System.out.print("Enter Customer ID: ");
                 int customerID = input.nextInt();
                 double total = reservationManager.searchReservationByCustomerID(customerID)
-                        .stream().mapToDouble(Reservation::getTotalCost).sum();
+                        .getTotalCost();
                 System.out.println("Total cost for customer " + customerID + ": $" + total);
             }
             default -> System.out.println("Invalid option.");
