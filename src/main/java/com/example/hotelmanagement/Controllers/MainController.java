@@ -2,6 +2,7 @@ package com.example.hotelmanagement.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -16,7 +17,7 @@ public class MainController {
 
     private void loadCenter(String fxmlName) {
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/example/hotelmanagement/" + fxmlName));
+            Parent pane = FXMLLoader.load(getClass().getResource("/com/example/hotelmanagement/" + fxmlName));
             centerPane.getChildren().setAll(pane);
             AnchorPane.setTopAnchor(pane, 0.0);
             AnchorPane.setBottomAnchor(pane, 0.0);

@@ -5,12 +5,63 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.Controllers.ReservationController">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<HBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.hotelmanagement.Controllers.ReservationController"
+      prefHeight="479.0" prefWidth="725.0">
+
+   <!-- Left side form -->
    <children>
-      <Text layoutX="238.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservation">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
+      <VBox prefWidth="250.0" spacing="5">
+         <children>
+            <Label text="Reservation ID"/>
+            <TextField fx:id="tfReservationID"/>
+
+            <Label text="Customer ID"/>
+            <TextField fx:id="tfCustomerID"/>
+
+            <Label text="Room ID"/>
+            <TextField fx:id="tfRoomID"/>
+
+            <Label text="Check In Date"/>
+            <TextField fx:id="tfCheckIn"/>
+
+            <Label text="Check Out Date"/>
+            <TextField fx:id="tfCheckOut"/>
+
+            <Label text="Total Cost"/>
+            <TextField fx:id="tfTotalCost"/>
+
+            <Label text="Reservation Date"/>
+            <TextField fx:id="tfReservationDate"/>
+
+            <HBox spacing="5">
+               <children>
+                  <Button fx:id="btnAddUpdate" text="Add/Update" onAction="#onAddUpdate"/>
+                  <Button fx:id="btnDelete" text="Delete" onAction="#onDelete"/>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+
+      <!-- Right side table -->
+      <TableView fx:id="tblReservations" HBox.hgrow="ALWAYS">
+         <columns>
+            <TableColumn fx:id="colReservationID" text="Res ID" prefWidth="80"/>
+            <TableColumn fx:id="colCustomerID" text="Customer ID" prefWidth="90"/>
+            <TableColumn fx:id="colRoomID" text="Room ID" prefWidth="80"/>
+            <TableColumn fx:id="colCheckIn" text="Check In" prefWidth="100"/>
+            <TableColumn fx:id="colCheckOut" text="Check Out" prefWidth="100"/>
+            <TableColumn fx:id="colTotalCost" text="Total Cost" prefWidth="100"/>
+            <TableColumn fx:id="colReservationDate" text="Res Date" prefWidth="100"/>
+         </columns>
+      </TableView>
    </children>
-</AnchorPane>
+</HBox>

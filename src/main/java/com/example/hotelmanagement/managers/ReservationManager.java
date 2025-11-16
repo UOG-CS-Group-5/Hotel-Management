@@ -97,4 +97,64 @@ public class ReservationManager {
             System.out.println("Database error: " + e.getMessage());
         }
     }
+
+    public List<Reservation> getAllReservations() {
+        List<Reservation> list = new ArrayList<>();
+        String sql = "SELECT * FROM Reservations";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Reservation r = new Reservation(
+                        rs.getInt("ReservationID"),
+                        rs.getInt("CustomerID"),
+                        rs.getInt("RoomID"),
+                        rs.getString("CheckInDate"),
+                        rs.getString("CheckOutDate"),
+                        rs.getDouble("TotalCost"),
+                        rs.getString("ReservationDate")
+                );
+                list.add(r);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+
+        return list;
+    }
+
+    public void updateReservation(int reservationID, int customerID, int roomID,
+                                  String checkInDate, String checkOutDate,
+                                  double totalCost, String reservationDate) {
+
+        String sql = "UPDATE Reservations " +
+                "SET CustomerID = ?, RoomID = ?, CheckInDate = ?, " +
+                "CheckOutDate = ?, TotalCost = ?, ReservationDate = ? " +
+                "WHERE ReservationID = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, customerID);
+            statement.setInt(2, roomID);
+            statement.setString(3, checkInDate);
+            statement.setString(4, checkOutDate);
+            statement.setDouble(5, totalCost);
+            statement.setString(6, reservationDate);
+            statement.setInt(7, reservationID);
+
+            int rows = statement.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Reservation updated successfully");
+            } else {
+                System.out.println("No reservation found with that ID");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+    }
 }
