@@ -4,7 +4,7 @@ import com.example.hotelmanagement.managers.*;
 import com.example.hotelmanagement.models.Customer;
 import com.example.hotelmanagement.models.Reservation;
 
-import java.util.*;
+import java.util.Scanner;
 
 // Handles console UI
 public class ConsoleUI {
@@ -15,21 +15,22 @@ public class ConsoleUI {
     // Starts program
     public void start() {
         System.out.println("UOG G5 Hotel Management Software");
-        if(!login()) {
+        if (!login()) {
             return;
         }
 
-        while(true) {
+        while (true) {
             // Main menu options
             System.out.println("\n| Main Menu |");
             System.out.println("1. Customer Menu");
             System.out.println("2. Reservation Menu");
             System.out.println("3. Search Menu");
             System.out.println("4. Exit");
-            System.out.println("Select option: ");
+            System.out.print("Select option: ");
             int option = input.nextInt();
+            input.nextLine(); // clear newline
 
-            switch(option) {
+            switch (option) {
                 case 1 -> customerMenu();
                 case 2 -> reservationMenu();
                 case 3 -> searchMenu();
@@ -50,11 +51,10 @@ public class ConsoleUI {
         String password = input.nextLine();
 
         // Default login id and password
-        if(id.equals("admin") && password.equals("admin")) {
+        if (id.equals("admin") && password.equals("admin")) {
             System.out.println("Login successful!");
             return true;
-        }
-        else {
+        } else {
             System.out.println("Invalid login! Exiting application...");
             return false;
         }
@@ -66,25 +66,26 @@ public class ConsoleUI {
         System.out.println("1. Add Customer");
         System.out.println("2. Delete Customer");
         System.out.println("3. View All Customers");
-        System.out.println("Select: ");
+        System.out.print("Select: ");
         int option = input.nextInt();
-        input.nextLine();
+        input.nextLine(); // clear newline
 
-        switch(option) {
+        switch (option) {
             case 1 -> {
-                System.out.println("Enter Full Name: ");
+                System.out.print("Enter Full Name: ");
                 String fullName = input.nextLine();
-                System.out.println("Enter Email: ");
+                System.out.print("Enter Email: ");
                 String email = input.nextLine();
-                System.out.println("Enter Phone Number: ");
+                System.out.print("Enter Phone Number: ");
                 String phoneNum = input.nextLine();
-                System.out.println("Enter Address: ");
+                System.out.print("Enter Address: ");
                 String address = input.nextLine();
                 customerManager.addCustomer(fullName, email, phoneNum, address);
             }
             case 2 -> {
-                System.out.println("Enter Customer ID: ");
+                System.out.print("Enter Customer ID: ");
                 int id = input.nextInt();
+                input.nextLine(); // clear newline
                 customerManager.deleteCustomer(id);
             }
             case 3 -> customerManager.displayAllCustomers();
@@ -100,6 +101,7 @@ public class ConsoleUI {
         System.out.println("3. View All Reservations");
         System.out.print("Select: ");
         int option = input.nextInt();
+        input.nextLine(); // clear newline
 
         switch (option) {
             case 1 -> {
@@ -107,22 +109,37 @@ public class ConsoleUI {
                 int customerID = input.nextInt();
                 System.out.print("Enter Room ID: ");
                 int roomID = input.nextInt();
+                input.nextLine(); // clear newline before reading String
+
                 System.out.print("Enter Check-in Date (YYYY-MM-DD): ");
-                String checkInDate = input.nextLine();
-                checkInDate = input.nextLine();
+                String checkInText = input.nextLine();
+
                 System.out.print("Enter Check-out Date (YYYY-MM-DD): ");
-                String checkOutDate = input.nextLine();
+                String checkOutText = input.nextLine();
+
                 System.out.print("Enter Total Cost: ");
                 double totalCost = input.nextDouble();
+                input.nextLine(); // clear newline
+
                 System.out.print("Enter Reservation Date (YYYY-MM-DD): ");
-                String reservationDate = input.nextLine();
-                reservationDate = input.nextLine();
-                reservationManager.addReservation(customerID, roomID,checkInDate,
-                        checkOutDate, totalCost, reservationDate);
+                String reservationDateText = input.nextLine();
+
+                try {
+                    // Convert String to java.sql.Date
+                    java.sql.Date checkIn = java.sql.Date.valueOf(checkInText);
+                    java.sql.Date checkOut = java.sql.Date.valueOf(checkOutText);
+                    java.sql.Date reservationDate = java.sql.Date.valueOf(reservationDateText);
+
+                    reservationManager.addReservation(customerID, roomID,
+                            checkIn, checkOut, totalCost, reservationDate);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Date format must be YYYY-MM-DD.");
+                }
             }
             case 2 -> {
                 System.out.print("Enter Reservation ID: ");
                 int id = input.nextInt();
+                input.nextLine(); // clear newline
                 reservationManager.deleteReservation(id);
             }
             case 3 -> reservationManager.displayAllReservations();
@@ -138,37 +155,39 @@ public class ConsoleUI {
         System.out.println("3. Show Total Cost for Customer ID");
         System.out.print("Select: ");
         int option = input.nextInt();
+        input.nextLine(); // clear newline
 
         switch (option) {
             case 1 -> {
                 System.out.print("Enter Customer Name: ");
                 String fullName = input.nextLine();
                 Customer c = customerManager.searchName(fullName);
-                // ? is a shorthand conditional if else statement, so if c does not equal to
-                // null then search for name, else return customer not found
                 System.out.println((c != null) ? c : "Customer not found.");
             }
             case 2 -> {
                 System.out.print("Enter Customer ID: ");
                 int customerID = input.nextInt();
-                var reservation = reservationManager.searchReservationByCustomerID(customerID);
+                input.nextLine(); // clear newline
+                Reservation reservation = reservationManager.searchReservationByCustomerID(customerID);
                 if (reservation == null) {
                     System.out.println("No reservations found.");
-                }
-                else {
+                } else {
                     System.out.println(reservation);
                 }
             }
             case 3 -> {
                 System.out.print("Enter Customer ID: ");
                 int customerID = input.nextInt();
-                double total = reservationManager.searchReservationByCustomerID(customerID)
-                        .getTotalCost();
-                System.out.println("Total cost for customer " + customerID + ": $" + total);
+                input.nextLine(); // clear newline
+                Reservation reservation = reservationManager.searchReservationByCustomerID(customerID);
+                if (reservation == null) {
+                    System.out.println("No reservations found.");
+                } else {
+                    double total = reservation.getTotalCost();
+                    System.out.println("Total cost for customer " + customerID + ": $" + total);
+                }
             }
             default -> System.out.println("Invalid option.");
         }
     }
-
-
 }

@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.sql.Date;
+
 public class ReservationController {
 
     @FXML private TableView<Reservation> tblReservations;
@@ -15,10 +17,10 @@ public class ReservationController {
     @FXML private TableColumn<Reservation, Integer> colReservationID;
     @FXML private TableColumn<Reservation, Integer> colCustomerID;
     @FXML private TableColumn<Reservation, Integer> colRoomID;
-    @FXML private TableColumn<Reservation, String> colCheckIn;
-    @FXML private TableColumn<Reservation, String> colCheckOut;
+    @FXML private TableColumn<Reservation, Date> colCheckIn;
+    @FXML private TableColumn<Reservation, Date> colCheckOut;
     @FXML private TableColumn<Reservation, Double> colTotalCost;
-    @FXML private TableColumn<Reservation, String> colReservationDate;
+    @FXML private TableColumn<Reservation, Date> colReservationDate;
 
     @FXML private TextField tfReservationID;
     @FXML private TextField tfCustomerID;
@@ -69,10 +71,10 @@ public class ReservationController {
         tfReservationID.setText(String.valueOf(r.getReservationID()));
         tfCustomerID.setText(String.valueOf(r.getCustomerID()));
         tfRoomID.setText(String.valueOf(r.getRoomID()));
-        tfCheckIn.setText(r.getCheckInDate());
-        tfCheckOut.setText(r.getCheckOutDate());
+        tfCheckIn.setText(r.getCheckInDate() != null ? r.getCheckInDate().toString() : "");
+        tfCheckOut.setText(r.getCheckOutDate() != null ? r.getCheckOutDate().toString() : "");
         tfTotalCost.setText(String.valueOf(r.getTotalCost()));
-        tfReservationDate.setText(r.getReservationDate());
+        tfReservationDate.setText(r.getReservationDate() != null ? r.getReservationDate().toString() : "");
     }
 
     private void clearForm() {
@@ -97,12 +99,19 @@ public class ReservationController {
         try {
             int customerID = Integer.parseInt(tfCustomerID.getText().trim());
             int roomID = Integer.parseInt(tfRoomID.getText().trim());
-            String checkIn = tfCheckIn.getText().trim();
-            String checkOut = tfCheckOut.getText().trim();
+
+            String checkInText = tfCheckIn.getText().trim();
+            String checkOutText = tfCheckOut.getText().trim();
+            String reservationDateText = tfReservationDate.getText().trim();
+
+            // Dates must be in yyyy-MM-dd format for Date.valueOf()
+            Date checkIn = checkInText.isEmpty() ? null : Date.valueOf(checkInText);
+            Date checkOut = checkOutText.isEmpty() ? null : Date.valueOf(checkOutText);
+            Date reservationDate = reservationDateText.isEmpty() ? null : Date.valueOf(reservationDateText);
+
             double totalCost = tfTotalCost.getText().isBlank()
                     ? 0.0
                     : Double.parseDouble(tfTotalCost.getText().trim());
-            String reservationDate = tfReservationDate.getText().trim();
 
             if (tfReservationID.getText().isBlank()) {
                 // Add new reservation
@@ -118,6 +127,9 @@ public class ReservationController {
 
         } catch (NumberFormatException e) {
             System.out.println("Invalid number value");
+        } catch (IllegalArgumentException e) {
+            // This will catch bad date formats from Date.valueOf(...)
+            System.out.println("Date must be in format yyyy-MM-dd");
         }
     }
 
