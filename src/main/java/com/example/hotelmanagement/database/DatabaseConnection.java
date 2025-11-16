@@ -8,7 +8,8 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     // path to database file
     private static final String DATABASEURL =
-            "jdbc:ucanaccess://C:\\Users\\James\\IdeaProjects\\Hotel-Management\\src\\main\\java\\com\\example\\hotelmanagement\\database\\HotelManagementSoftwareDatabase.accdb";
+            //"jdbc:ucanaccess://C:\\Users\\James\\IdeaProjects\\Hotel-Management\\src\\main\\java\\com\\example\\hotelmanagement\\database\\HotelManagementSoftwareDatabase.accdb";
+            "jdbc:ucanaccess://C:\\Users\\thefr\\OneDrive\\Documents\\ComputerScience-Projects\\Hotel-Management\\src\\main\\java\\com\\example\\hotelmanagement\\database\\HotelManagementSoftwareDatabase.accdb";
     // *Using Intellij
     // To get database file, right click DB file in the project explorer on the left
     // Select "Copy Path/Reference" and select "Absolute Path"

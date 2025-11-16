@@ -3,6 +3,7 @@ module com.example.hotelmanagement {
     requires javafx.fxml;
     requires java.sql;
 
+    opens com.example.hotelmanagement.models to javafx.base;
 
     opens com.example.hotelmanagement to javafx.fxml;
     exports com.example.hotelmanagement;

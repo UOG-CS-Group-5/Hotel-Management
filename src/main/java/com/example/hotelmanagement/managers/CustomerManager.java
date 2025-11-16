@@ -88,4 +88,56 @@ public class CustomerManager {
             System.out.println("Database error: " + e.getMessage());
         }
     }
+
+    public List<Customer> getAllCustomers() {
+        List<Customer> list = new ArrayList<>();
+        String sql = "SELECT * FROM Customers";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+
+            while (resultSet.next()) {
+                Customer c = new Customer(
+                        resultSet.getInt("customerID"),
+                        resultSet.getString("fullName"),
+                        resultSet.getString("email"),
+                        resultSet.getString("phone"),
+                        resultSet.getString("address")
+                );
+                list.add(c);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+
+        return list;
+    }
+
+    public void updateCustomer(int customerID, String fullName, String email,
+                               String phoneNum, String address) {
+        String sql = "UPDATE Customers SET fullName = ?, email = ?, phone = ?, address = ? " +
+                "WHERE customerID = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, fullName);
+            statement.setString(2, email);
+            statement.setString(3, phoneNum);
+            statement.setString(4, address);
+            statement.setInt(5, customerID);
+
+            int rows = statement.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Customer updated successfully");
+            } else {
+                System.out.println("No customer found with that ID");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+    }
 }
