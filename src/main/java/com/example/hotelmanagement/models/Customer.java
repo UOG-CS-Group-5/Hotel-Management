@@ -8,7 +8,6 @@ public class Customer {
     private String email;
     private String phoneNum;
     private String address;
-    private String dateCreated;
 
     // Constructor
     public Customer(int customerID, String fullName, String email,
@@ -18,7 +17,6 @@ public class Customer {
         this.email = email;
         this.phoneNum = phoneNum;
         this.address = address;
-        this.dateCreated = dateCreated;
     }
 
     // Getters
@@ -37,9 +35,6 @@ public class Customer {
     public String getAddress() {
         return address;
     }
-    public String getDateCreated() {
-        return dateCreated;
-    }
 
     // toString to display info
     @Override
@@ -48,8 +43,7 @@ public class Customer {
                 "\nName: " + fullName +
                 "\nEmail: " + email +
                 "\nPhone Number: " + phoneNum +
-                "\nAddress: " + address +
-                "\nDate Created: " + dateCreated;
+                "\nAddress: " + address;
     }
 
 }
