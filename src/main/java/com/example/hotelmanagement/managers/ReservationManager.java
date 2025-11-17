@@ -86,17 +86,17 @@ public class ReservationManager {
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setInt(1, customerID);
-            ResultSet rs = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
 
-            if (rs.next()) {
+            if (resultSet.next()) {
                 return new Reservation(
-                        rs.getInt("ReservationID"),
-                        rs.getInt("CustomerID"),
-                        rs.getInt("RoomID"),
-                        rs.getDate("CheckInDate"),
-                        rs.getDate("CheckOutDate"),
-                        rs.getDouble("TotalCost"),
-                        rs.getDate("ReservationDate")
+                        resultSet.getInt("ReservationID"),
+                        resultSet.getInt("CustomerID"),
+                        resultSet.getInt("RoomID"),
+                        resultSet.getDate("CheckInDate"),
+                        resultSet.getDate("CheckOutDate"),
+                        resultSet.getDouble("TotalCost"),
+                        resultSet.getDate("ReservationDate")
                 );
             }
 
@@ -113,17 +113,17 @@ public class ReservationManager {
 
         try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery(sql)) {
+             ResultSet resultSet = statement.executeQuery(sql)) {
 
-            while (rs.next()) {
+            while (resultSet.next()) {
                 Reservation r = new Reservation(
-                        rs.getInt("ReservationID"),
-                        rs.getInt("CustomerID"),
-                        rs.getInt("RoomID"),
-                        rs.getDate("CheckInDate"),
-                        rs.getDate("CheckOutDate"),
-                        rs.getDouble("TotalCost"),
-                        rs.getDate("ReservationDate")
+                        resultSet.getInt("ReservationID"),
+                        resultSet.getInt("CustomerID"),
+                        resultSet.getInt("RoomID"),
+                        resultSet.getDate("CheckInDate"),
+                        resultSet.getDate("CheckOutDate"),
+                        resultSet.getDouble("TotalCost"),
+                        resultSet.getDate("ReservationDate")
                 );
                 list.add(r);
             }
