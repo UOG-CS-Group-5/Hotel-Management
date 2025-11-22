@@ -1,6 +1,7 @@
 package com.example.hotelmanagement.managers;
 
 import com.example.hotelmanagement.database.DatabaseConnection;
+import com.example.hotelmanagement.models.CustomerReservation;
 import com.example.hotelmanagement.models.Reservation;
 
 import java.sql.*;
@@ -167,5 +168,115 @@ public class ReservationManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<CustomerReservation> getAllCustomerReservations() {
+        List<CustomerReservation> list = new ArrayList<>();
+
+        String sql =
+                "SELECT r.ReservationID, r.CustomerID, c.fullName, r.RoomID, " +
+                        "r.CheckInDate, r.CheckOutDate, r.TotalCost, r.ReservationDate " +
+                        "FROM Reservations r " +
+                        "INNER JOIN Customers c ON r.CustomerID = c.CustomerID";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+
+            while (rs.next()) {
+                CustomerReservation cr = new CustomerReservation(
+                        rs.getInt("ReservationID"),
+                        rs.getInt("CustomerID"),
+                        rs.getString("fullName"),
+                        rs.getInt("RoomID"),
+                        rs.getDate("CheckInDate"),
+                        rs.getDate("CheckOutDate"),
+                        rs.getDouble("TotalCost"),
+                        rs.getDate("ReservationDate")
+                );
+                list.add(cr);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    // 1. Search customer info with customer name
+    public List<CustomerReservation> searchCustomerReservationsByName(String namePattern) {
+        List<CustomerReservation> list = new ArrayList<>();
+
+        String sql =
+                "SELECT r.ReservationID, r.CustomerID, c.fullName, r.RoomID, " +
+                        "r.CheckInDate, r.CheckOutDate, r.TotalCost, r.ReservationDate " +
+                        "FROM Reservations r " +
+                        "INNER JOIN Customers c ON r.CustomerID = c.CustomerID " +
+                        "WHERE c.fullName LIKE ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, "%" + namePattern + "%");
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                CustomerReservation cr = new CustomerReservation(
+                        rs.getInt("ReservationID"),
+                        rs.getInt("CustomerID"),
+                        rs.getString("fullName"),
+                        rs.getInt("RoomID"),
+                        rs.getDate("CheckInDate"),
+                        rs.getDate("CheckOutDate"),
+                        rs.getDouble("TotalCost"),
+                        rs.getDate("ReservationDate")
+                );
+                list.add(cr);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    // 2 and 3. Get all reservations for a customer number
+    public List<CustomerReservation> getCustomerReservationsByCustomerID(int customerID) {
+        List<CustomerReservation> list = new ArrayList<>();
+
+        String sql =
+                "SELECT r.ReservationID, r.CustomerID, c.fullName, r.RoomID, " +
+                        "r.CheckInDate, r.CheckOutDate, r.TotalCost, r.ReservationDate " +
+                        "FROM Reservations r " +
+                        "INNER JOIN Customers c ON r.CustomerID = c.CustomerID " +
+                        "WHERE r.CustomerID = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, customerID);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                CustomerReservation cr = new CustomerReservation(
+                        rs.getInt("ReservationID"),
+                        rs.getInt("CustomerID"),
+                        rs.getString("fullName"),
+                        rs.getInt("RoomID"),
+                        rs.getDate("CheckInDate"),
+                        rs.getDate("CheckOutDate"),
+                        rs.getDouble("TotalCost"),
+                        rs.getDate("ReservationDate")
+                );
+                list.add(cr);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 }
