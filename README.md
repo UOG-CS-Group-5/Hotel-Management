@@ -4,7 +4,7 @@ Should be able to connect to a database and include log-in and exit options.
 
 # Connecting to Database
 Using Intellij:
-- To get database file, right click DB file in the project explorer
+- To get database file location, right click DB file in the project explorer
 - Select "Copy Path/Reference" and select "Absolute Path"
 - Replace after "jdbc:ucanaccess://" in the URL
 - "private static final String DATABASEURL = "jdbc:ucanaccess://C:\\Users\\James\\IdeaProjects\\
