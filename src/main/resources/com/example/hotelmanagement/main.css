@@ -1,0 +1,62 @@
+/* Center content area contrast */
+.content-pane {
+    -fx-background-color: #ffffff22; /* very light translucent white */
+    -fx-padding: 20;
+}
+
+/* Sidebar stays GREEN */
+.sidebar {
+    -fx-background-color: #046A38;
+    -fx-padding: 20 0 20 0;
+    -fx-spacing: 10;
+}
+
+.sidebar .label {
+    -fx-text-fill: white;
+}
+
+.content-pane .label {
+    -fx-text-fill: black;
+}
+
+.content-pane .text-field,
+.content-pane .password-field {
+    -fx-text-fill: black;
+    -fx-prompt-text-fill: #666666;
+}
+
+/* Main content area becomes WHITE */
+.content-pane {
+    -fx-background-color: white;
+    -fx-padding: 20;
+}
+
+/* All non-button text white */
+.label {
+    -fx-text-fill: black;
+}
+
+.text-field, .password-field {
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #dddddd;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;      /* or white if you prefer */
+    -fx-font-size: 14px;
+
+    /* Nice left-aligned text inside the full-width button */
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 0 0 10;     /* move text slightly right inside button */
+
+    /* IMPORTANT: remove any -fx-pref-width line you had before */
+}
+
+.nav-button:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+}
+
+.nav-button:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.25);
+}
