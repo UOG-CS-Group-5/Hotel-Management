@@ -12,4 +12,4 @@ Using Intellij:
 
  # Running software
  - To test using console, run Main.java.
- - - To run actual software with JavaFX, run HotelManagement.java file.
+ - To run actual software with JavaFX, run HotelManagement.java file.
