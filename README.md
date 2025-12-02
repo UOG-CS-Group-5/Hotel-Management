@@ -10,6 +10,6 @@ Using Intellij:
 - private static final String DATABASEURL = "jdbc:ucanaccess://C:\\Users\\James\\IdeaProjects\\
     Hotel-Management\\src\\main\\java\\com\\example\\hotelmanagement\\database\\HotelManagementSoftwareDatabase.accdb";
 
-  # Running software
-  - To test using console, run Main.java.
-  - To run actual software with JavaFX, run HotelManagement.java file.
+ # Running software
+ - To test using console, run Main.java.
+ - - To run actual software with JavaFX, run HotelManagement.java file.
