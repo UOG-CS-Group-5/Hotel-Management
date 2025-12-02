@@ -9,18 +9,32 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="anchorePane" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.Controllers.LogonController">
+<?import java.awt.Image?>
+<AnchorPane fx:id="anchorePane"
+            prefHeight="200.0" prefWidth="300.0"
+            style="-fx-background-color: #046A38;"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.hotelmanagement.Controllers.LogonController">
    <children>
+
       <HBox layoutX="34.0" layoutY="63.0" prefHeight="74.0" prefWidth="231.0">
          <children>
             <VBox prefHeight="74.0" prefWidth="57.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="75.0" text="ID:">
+                  <Label alignment="CENTER_RIGHT"
+                         prefHeight="17.0" prefWidth="75.0"
+                         text="ID:"
+                         style="-fx-text-fill: white;">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="79.0" text="Password:">
+
+                  <Label alignment="CENTER_RIGHT"
+                         prefHeight="17.0" prefWidth="79.0"
+                         text="Password:"
+                         style="-fx-text-fill: white;">
                      <VBox.margin>
                         <Insets top="25.0" />
                      </VBox.margin>
@@ -45,7 +59,7 @@
             </VBox>
          </children>
       </HBox>
-      <Label fx:id="lblStatus" alignment="CENTER" layoutY="26.0" prefHeight="17.0" prefWidth="300.0" text="Sign in" />
+      <Label fx:id="lblStatus" alignment="CENTER" layoutY="26.0" prefHeight="17.0" prefWidth="300.0" text="Sign in" style="-fx-text-fill: white;"/>
       <Button fx:id="btnLogin" layoutX="124.0" layoutY="152.0" mnemonicParsing="false" onAction="#onLogin" text="Log In" />
    </children>
 </AnchorPane>
