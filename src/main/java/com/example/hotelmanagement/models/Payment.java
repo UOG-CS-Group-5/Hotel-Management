@@ -1,16 +1,18 @@
 package com.example.hotelmanagement.models;
 
+import java.sql.Date;
+
 // Payment details
 public class Payment {
     // Variables
     private int paymentID;
     private int reservationID;
-    private String paymentDate;
+    private Date paymentDate;
     private double amountPaid;
     private String paymentMethod;
 
     // Constructor
-    public Payment(int paymentID, int reservationID, String paymentDate,
+    public Payment(int paymentID, int reservationID, Date paymentDate,
                    double amountPaid, String paymentMethod) {
         this.paymentID = paymentID;
         this.reservationID = reservationID;
@@ -26,7 +28,7 @@ public class Payment {
     public int getReservationID() {
         return reservationID;
     }
-    public String getPaymentDate() {
+    public Date getPaymentDate() {
         return paymentDate;
     }
     public double getAmountPaid() {

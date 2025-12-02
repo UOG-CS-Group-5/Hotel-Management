@@ -8,17 +8,17 @@ import java.util.*;
 
 public class RoomManager {
     // Add a new room
-    public void addRoom(Room room) {
+    public void addRoom(int roomID, String roonNumber, String roomType, double pricePerNight, boolean availability) {
         String sql = "INSERT INTO Rooms (RoomID, RoomNumber, RoomType, " +
                 "PricePerNight, Availability) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, room.getRoomID());
-            statement.setString(2, room.getRoomNumber());
-            statement.setString(3, room.getRoomType());
-            statement.setDouble(4, room.getPricePerNight());
-            statement.setBoolean(5, room.isAvailability());
+            statement.setInt(1, roomID);
+            statement.setString(2, roonNumber);
+            statement.setString(3, roomType);
+            statement.setDouble(4, pricePerNight);
+            statement.setBoolean(5, availability);
             statement.executeUpdate();
             System.out.println("==============================================");
             System.out.println("Room added to database!");
@@ -60,14 +60,12 @@ public class RoomManager {
              ResultSet resultSet = statement.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                Room room = new Room(
-                        resultSet.getInt("RoomID"),
-                        resultSet.getString("RoomNumber"),
-                        resultSet.getString("RoomType"),
-                        resultSet.getDouble("PricePerNight"),
-                        resultSet.getBoolean("Availibility")
-                );
-                rooms.add(room);
+                System.out.println("Room ID: " + resultSet.getInt("RoomID"));
+                System.out.println("Room Number: " + resultSet.getString("RoomNumber"));
+                System.out.println("Room Type: " + resultSet.getString("RoomType"));
+                System.out.println("Price per Night: " + resultSet.getDouble("PricePerNight"));
+                System.out.println("Availability: " + resultSet.getBoolean("Availability"));
+                System.out.println("----------------------------------------");
             }
 
         } catch (SQLException e) {
@@ -92,7 +90,7 @@ public class RoomManager {
                         resultSet.getString("RoomNumber"),
                         resultSet.getString("RoomType"),
                         resultSet.getDouble("PricePerNight"),
-                        resultSet.getBoolean("Availibility")
+                        resultSet.getBoolean("Availability")
                 );
             }
 
