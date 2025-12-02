@@ -1,22 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotelmanagement.Controllers.MainController">
+<BorderPane fx:id="rootPane"
+            maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="479.0" prefWidth="894.0"
+            style="-fx-background-color: #046A38;"
+            stylesheets="@main.css"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.hotelmanagement.Controllers.MainController">
    <left>
-      <VBox fx:id="navBar" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="navBar"
+            styleClass="sidebar"
+            prefHeight="200.0" prefWidth="100.0"
+            BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#openHome" prefHeight="41.0" prefWidth="100.0" text="Home" />
-            <Button mnemonicParsing="false" onAction="#openCustomer" prefHeight="41.0" prefWidth="100.0" text="Customer" />
-            <Button mnemonicParsing="false" onAction="#openReservation" prefHeight="41.0" prefWidth="100.0" text="Reservation" />
-            <Button mnemonicParsing="false" onAction="#openSearch" prefHeight="41.0" prefWidth="100.0" text="Search" />
+            <Button mnemonicParsing="false"
+                    onAction="#openHome"
+                    prefHeight="41.0" prefWidth="100.0"
+                    text="Home"
+                    styleClass="nav-button" />
+
+            <Button mnemonicParsing="false"
+                    onAction="#openCustomer"
+                    prefHeight="41.0" prefWidth="100.0"
+                    text="Customer"
+                    styleClass="nav-button" />
+
+            <Button mnemonicParsing="false"
+                    onAction="#openReservation"
+                    prefHeight="41.0" prefWidth="100.0"
+                    text="Reservation"
+                    styleClass="nav-button" />
+
+            <Button mnemonicParsing="false"
+                    onAction="#openSearch"
+                    prefHeight="41.0" prefWidth="100.0"
+                    text="Search"
+                    styleClass="nav-button" />
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <Button text="Sign Out"
+                    onAction="#onSignout"
+                    prefHeight="41.0" prefWidth="160.0"
+                    styleClass="nav-button" />
          </children>
       </VBox>
    </left>
    <center>
-      <AnchorPane fx:id="centerPane" prefHeight="479.0" prefWidth="725.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="centerPane"
+                  styleClass="content-pane"
+                  prefHeight="479.0" prefWidth="725.0"
+                  BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
