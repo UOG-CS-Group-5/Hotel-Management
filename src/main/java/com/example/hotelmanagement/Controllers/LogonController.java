@@ -1,6 +1,5 @@
 package com.example.hotelmanagement.Controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,10 +14,6 @@ public class LogonController {
     @FXML private TextField tf_ID;
     @FXML private PasswordField pf_Pass;
     @FXML private Label lblStatus;
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
     private static final String ADMIN_USER = "admin";
     private static final String ADMIN_PASS = "admin";
@@ -54,7 +49,5 @@ public class LogonController {
         }
 
     }
-
-
 
 }

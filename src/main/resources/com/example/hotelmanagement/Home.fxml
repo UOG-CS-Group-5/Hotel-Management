@@ -2,8 +2,8 @@
 
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
 <?import javafx.geometry.Pos?>
 
 <VBox xmlns="http://javafx.com/javafx/23.0.1"
@@ -15,43 +15,54 @@
 
    <children>
 
-      <!-- Top bar: title + logout -->
-      <HBox alignment="CENTER_RIGHT" spacing="10" prefWidth="600">
+      <!-- Greeting + date -->
+      <VBox alignment="CENTER_LEFT" spacing="5" prefWidth="600">
          <children>
-            <Label text="UOG G5 Hotel Management" style="-fx-font-size: 20; -fx-font-weight: bold;" />
-            <HBox HBox.hgrow="ALWAYS" />
-            <Button fx:id="btnLogout"
-                    text="Logout"
-                    onAction="#onLogout" />
+            <!-- Dynamic greeting -->
+            <Label fx:id="lblGreeting"
+                   text="Welcome to Hotel Management Database!"
+                   style="-fx-font-size: 22; -fx-font-weight: bold;" />
+
+            <!-- Date (set from controller) -->
+            <Label fx:id="lblDate"
+                   text="Today: "
+                   style="-fx-font-size: 14; -fx-text-fill: #666666;" />
          </children>
-      </HBox>
+      </VBox>
 
-      <!-- Today label -->
-      <Label fx:id="lblDate"
-             style="-fx-font-size: 14;" />
+      <!-- Optional section title -->
+      <Label text="Today’s Summary"
+             style="-fx-font-size: 16; -fx-font-weight: bold;" />
 
-      <!-- Summary stats -->
-      <HBox alignment="CENTER" spacing="40">
+      <!-- Summary card -->
+      <HBox alignment="CENTER" prefWidth="600">
          <children>
-
-            <VBox alignment="CENTER" spacing="5">
+            <GridPane hgap="40" vgap="15"
+                      style="-fx-background-color: #f5f5f5;
+                             -fx-padding: 20;
+                             -fx-border-color: #dddddd;
+                             -fx-border-radius: 10;
+                             -fx-background-radius: 10;">
                <children>
-                  <Label text="Total Customers"
-                         style="-fx-font-size: 14; -fx-font-weight: bold;" />
+                  <!-- Row 0: Total customers -->
+                  <Label text="Total Customers:"
+                         style="-fx-font-size: 14; -fx-font-weight: bold;"
+                         GridPane.rowIndex="0" GridPane.columnIndex="0" />
                   <Label fx:id="lblTotalCustomers"
-                         style="-fx-font-size: 16;" />
-               </children>
-            </VBox>
+                         text="0"
+                         style="-fx-font-size: 16;"
+                         GridPane.rowIndex="0" GridPane.columnIndex="1" />
 
-            <VBox alignment="CENTER" spacing="5">
-               <children>
-                  <Label text="Total Reservations"
-                         style="-fx-font-size: 14; -fx-font-weight: bold;" />
+                  <!-- Row 1: Total reservations -->
+                  <Label text="Total Reservations:"
+                         style="-fx-font-size: 14; -fx-font-weight: bold;"
+                         GridPane.rowIndex="1" GridPane.columnIndex="0" />
                   <Label fx:id="lblTotalReservations"
-                         style="-fx-font-size: 16;" />
+                         text="0"
+                         style="-fx-font-size: 16;"
+                         GridPane.rowIndex="1" GridPane.columnIndex="1" />
                </children>
-            </VBox>
-
+            </GridPane>
          </children>
       </HBox>
 

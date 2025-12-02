@@ -1,23 +1,33 @@
 package com.example.hotelmanagement.Controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import com.example.hotelmanagement.Controllers.HomeController;
+
 public class MainController {
+
     @FXML
-    private BorderPane rootPane;  // Only if you add fx:id to the borderpane (optional)
+    private BorderPane rootPane;  
 
     @FXML
     private AnchorPane centerPane;
 
     private void loadCenter(String fxmlName) {
         try {
-            Parent pane = FXMLLoader.load(getClass().getResource("/com/example/hotelmanagement/" + fxmlName));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/hotelmanagement/" + fxmlName));
+            Parent pane = loader.load();
+
             centerPane.getChildren().setAll(pane);
             AnchorPane.setTopAnchor(pane, 0.0);
             AnchorPane.setBottomAnchor(pane, 0.0);
@@ -53,4 +63,19 @@ public class MainController {
     private void openSearch() {
         loadCenter("Search.fxml");
     }
+
+    @FXML
+    private void onSignout(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(
+                    getClass().getResource("/com/example/hotelmanagement/Logon.fxml")
+            );
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
