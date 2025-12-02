@@ -20,7 +20,7 @@
          <children>
             <!-- Dynamic greeting -->
             <Label fx:id="lblGreeting"
-                   text="Welcome, User to Hotel Management Database"
+                   text="Welcome to Hotel Management Database!"
                    style="-fx-font-size: 22; -fx-font-weight: bold;" />
 
             <!-- Date (set from controller) -->
